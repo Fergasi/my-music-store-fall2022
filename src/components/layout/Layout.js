@@ -1,12 +1,12 @@
-import { Box } from '@mui/material';
-import Footer from './Footer';
-import Header from './Header';
+import { Box } from "@mui/material";
+import Footer from "./Footer";
+import Header from "./Header";
 
 function Layout(props) {
   const { children } = props;
 
   return (
-    <Box display="flex" flexDirection="column" minHeight="100vh">
+    <Box display='flex' flexDirection='column' minHeight='100vh'>
       <Box>
         <Header />
       </Box>

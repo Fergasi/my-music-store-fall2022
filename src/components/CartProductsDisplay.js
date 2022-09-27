@@ -16,11 +16,21 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { UserLoginContext } from "../App";
+import { shoppingCartContext } from "../context/shoppingCartContext";
 
 const CartProductsDisplay = (props) => {
   const { productData, count } = props;
-  const { shoppingCart, setShoppingCart } = useContext(UserLoginContext);
+  const { shoppingCart, setShoppingCart } = useContext(shoppingCartContext);
+
+  const deleteHandler = () => {
+    const cartCopy = [...shoppingCart];
+    var cartItemIndex = cartCopy.findIndex((item) => {
+      return item.id === productData.id;
+    });
+
+    cartCopy.splice(cartItemIndex, 1);
+    setShoppingCart(cartCopy);
+  };
 
   return (
     <Card
@@ -63,22 +73,7 @@ const CartProductsDisplay = (props) => {
         <Box display='flex' justifyContent='space-between' width={1}>
           <Box>x{count}</Box>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <DeleteIcon
-            onClick={() => {
-              const cartCopy = JSON.parse(
-                JSON.stringify(shoppingCart.products)
-              );
-              var cartItemIndex = cartCopy.findIndex((object) => {
-                return object.id === productData.id;
-              });
-
-              cartCopy.splice(cartItemIndex, 1);
-
-              setShoppingCart({
-                products: cartCopy,
-              });
-            }}
-          />
+          <DeleteIcon onClick={deleteHandler} />
         </Box>
       </CardActions>
     </Card>

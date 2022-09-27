@@ -3,37 +3,37 @@ import { Box } from "@mui/material";
 import Layout from "../layout/Layout";
 import CartProductsDisplay from "../CartProductsDisplay";
 import { productList } from "../../mockData";
-import { UserLoginContext } from "../../App";
+import { shoppingCartContext } from "../../context/shoppingCartContext";
 
 const ShoppingCart = () => {
-  const { shoppingCart } = useContext(UserLoginContext);
+  const { shoppingCart } = useContext(shoppingCartContext);
   const [counter, setCounter] = useState({});
-
-  const cartItemsToMap = () => {
-    const newArr = [];
-
-    Object.keys(counter).forEach((key) => {
-      const item = productList.find((product) => product.id === key);
-      newArr.push(item);
-    });
-    return newArr;
-  };
+  const [itemsToMap, setItemsToMap] = useState([]);
 
   const cartTotal = () => {
     let total = 0;
-    shoppingCart.products.forEach((item) => {
+    shoppingCart.forEach((item) => {
       total += item.price;
     });
+    // console.log("cartTotal", total);
     return total;
   };
 
   useEffect(() => {
     const counter = {};
+    const newArr = [];
 
-    shoppingCart.products.forEach(function (obj) {
+    shoppingCart.forEach(function (obj) {
       var key = obj.id;
       counter[key] = (counter[key] || 0) + 1;
     });
+
+    Object.keys(counter).forEach((key) => {
+      const item = productList.find((product) => product.id === key);
+      newArr.push(item);
+    });
+
+    setItemsToMap(newArr);
     setCounter(counter);
     console.log("counter: ", counter);
   }, [shoppingCart]);
@@ -41,7 +41,7 @@ const ShoppingCart = () => {
   return (
     <Layout>
       <Box display='flex' flexDirection='column' alignItems='center'>
-        {cartItemsToMap().map((product, idx) => {
+        {itemsToMap.map((product, idx) => {
           return (
             <Box mb={6} key={idx} bgcolor='white'>
               <CartProductsDisplay
@@ -70,6 +70,7 @@ const ShoppingCart = () => {
           })}
         </Box>
       </Box>
+      <Box display='flex' flexDirection='column' alignItems='center'></Box>
     </Layout>
   );
 };

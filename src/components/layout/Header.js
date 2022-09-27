@@ -12,13 +12,17 @@ import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
 import { useNavigate } from "react-router-dom";
 import { sampleUserData } from "../../mockData";
-import { UserLoginContext } from "../../App";
+import { userContext } from "../../context/userContext";
+import { shoppingCartContext } from "../../context/shoppingCartContext";
 
 export default function MenuAppBar() {
-  const { loggedIn } = useContext(UserLoginContext);
+  const { loggedIn } = useContext(userContext);
+  const { shoppingCart } = useContext(shoppingCartContext);
   let navigate = useNavigate();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static' bgcolor='red'>
@@ -41,7 +45,9 @@ export default function MenuAppBar() {
               color='inherit'
               onClick={() => navigate("/cart")}
             >
-              <ShoppingCartIcon />
+              <Badge badgeContent={shoppingCart.length} color='success'>
+                <ShoppingCartIcon />
+              </Badge>
             </IconButton>
             <IconButton
               size='large'

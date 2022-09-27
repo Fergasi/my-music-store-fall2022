@@ -15,11 +15,11 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Button } from "@mui/material";
-import { UserLoginContext } from "../App";
+import { shoppingCartContext } from "../context/shoppingCartContext";
 
 function ProductDisplay(props) {
   const { productData } = props;
-  const { shoppingCart, setShoppingCart } = useContext(UserLoginContext);
+  const { shoppingCart, setShoppingCart } = useContext(shoppingCartContext);
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -41,10 +41,8 @@ function ProductDisplay(props) {
         <Box display='flex' justifyContent='space-between' width={1}>
           <Button
             onClick={() => {
-              const newcart = [...shoppingCart.products, productData];
-              setShoppingCart({
-                products: newcart,
-              });
+              const newcart = [...shoppingCart, productData];
+              setShoppingCart(newcart);
               // console.log("shoppingCart: ", newcart);
             }}
           >

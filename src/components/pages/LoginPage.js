@@ -5,10 +5,10 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import UsernameField from "../textFields/UsernameField";
 import PasswordField from "../textFields/PasswordField";
-import { UserLoginContext } from "../../App";
+import { userContext } from "../../context/userContext";
 
 const LoginPage = () => {
-  const { user, setUser, loggedIn, setLoggedIn } = useContext(UserLoginContext);
+  const { user, setUser, loggedIn, setLoggedIn } = useContext(userContext);
   let navigate = useNavigate();
 
   const handleClickShowPassword = () => {

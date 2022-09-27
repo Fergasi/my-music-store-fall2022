@@ -6,39 +6,24 @@ import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 import ShoppingCart from "./components/pages/ShoppingCart";
 import CustomThemeProvider from "./CustomThemeProvider";
-import { sampleUserData } from "./mockData";
-export const UserLoginContext = createContext();
+import UserContextProvider from "./context/userContext";
+import ShoppingCartContextProvider from "./context/shoppingCartContext";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-    showPassword: false,
-  });
-  const [shoppingCart, setShoppingCart] = useState({ products: [] });
-
   return (
-    <UserLoginContext.Provider
-      value={{
-        user,
-        setUser,
-        loggedIn,
-        setLoggedIn,
-        shoppingCart,
-        setShoppingCart,
-      }}
-    >
-      <CustomThemeProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/sign-in' element={<LoginPage />} />
-            <Route path='/home' element={<HomePage />} />
-            <Route path='/cart' element={<ShoppingCart />} />
-          </Routes>
-        </BrowserRouter>
-      </CustomThemeProvider>
-    </UserLoginContext.Provider>
+    <CustomThemeProvider>
+      <UserContextProvider>
+        <ShoppingCartContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/sign-in' element={<LoginPage />} />
+              <Route path='/home' element={<HomePage />} />
+              <Route path='/cart' element={<ShoppingCart />} />
+            </Routes>
+          </BrowserRouter>
+        </ShoppingCartContextProvider>
+      </UserContextProvider>
+    </CustomThemeProvider>
   );
 }
 

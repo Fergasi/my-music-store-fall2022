@@ -1,59 +1,28 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import React from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import HomeIcon from "@mui/icons-material/Home";
+import { Box, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
 import CartProductsDisplay from "../CartProductsDisplay";
-import { productList } from "../../mockData";
-import { shoppingCartContext } from "../../context/shoppingCartContext";
+import { useShoppingCart } from "../../context/shoppingCartContext";
 
 const ShoppingCart = () => {
-  const { shoppingCart } = useContext(shoppingCartContext);
-  const [counter, setCounter] = useState({});
-  const [itemsToMap, setItemsToMap] = useState([]);
-
-  const cartTotal = () => {
-    let total = 0;
-    shoppingCart.forEach((item) => {
-      total += item.price;
-    });
-    // console.log("cartTotal", total);
-    return total;
-  };
-
-  useEffect(() => {
-    const counter = {};
-    const newArr = [];
-
-    shoppingCart.forEach(function (obj) {
-      var key = obj.id;
-      counter[key] = (counter[key] || 0) + 1;
-    });
-
-    Object.keys(counter).forEach((key) => {
-      const item = productList.find((product) => product.id === key);
-      newArr.push(item);
-    });
-
-    setItemsToMap(newArr);
-    setCounter(counter);
-    console.log("counter: ", counter);
-  }, [shoppingCart]);
+  const { shoppingCart, emptyCart } = useShoppingCart();
 
   return (
     <Layout>
       <Box display='flex' flexDirection='column' alignItems='center'>
-        {itemsToMap.map((product, idx) => {
+        {shoppingCart.map((product, idx) => {
           return (
             <Box mb={6} key={idx} bgcolor='white'>
-              <CartProductsDisplay
-                productData={product}
-                count={counter[product.id]}
-              />
+              <CartProductsDisplay productData={product} />
             </Box>
           );
         })}
       </Box>
       <Box display='flex' flexDirection='column' alignItems='center'>
-        {cartTotal() === 0 && <h2>Nothing in your cart...</h2>}
+        {shoppingCart.length === 0 && <h2>Nothing in your cart...</h2>}
       </Box>
       <Box display='flex' flexDirection='column' alignItems='center'>
         <Box
@@ -64,13 +33,36 @@ const ShoppingCart = () => {
           }}
         >
           <h3>Total:</h3>&nbsp;
-          {cartTotal().toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD",
-          })}
+          {shoppingCart
+            .reduce((acc, item) => acc + item.total, 0)
+            .toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}
         </Box>
       </Box>
       <Box display='flex' flexDirection='column' alignItems='center'></Box>
+      <Box mt={5} display='flex' flexDirection='column' alignItems='center'>
+        <Box mb={3}>
+          <Button variant='contained'>Checkout</Button>
+        </Box>
+        <Box mb={3}>
+          <Button
+            variant='contained'
+            startIcon={<DeleteIcon />}
+            onClick={emptyCart}
+          >
+            Empty Cart
+          </Button>
+        </Box>
+        <Box mb={3}>
+          <Link to='/home'>
+            <Button variant='contained' startIcon={<HomeIcon />}>
+              Home
+            </Button>
+          </Link>
+        </Box>
+      </Box>
     </Layout>
   );
 };

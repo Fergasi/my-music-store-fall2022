@@ -45,7 +45,13 @@ export default function MenuAppBar() {
               color='inherit'
               onClick={() => navigate("/cart")}
             >
-              <Badge badgeContent={shoppingCart.length} color='success'>
+              <Badge
+                badgeContent={shoppingCart.reduce(
+                  (acc, item) => acc + item.quantity,
+                  0
+                )}
+                color='success'
+              >
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

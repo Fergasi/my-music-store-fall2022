@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -16,21 +16,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { shoppingCartContext } from "../context/shoppingCartContext";
+import { useShoppingCart } from "../context/shoppingCartContext";
 
 const CartProductsDisplay = (props) => {
-  const { productData, count } = props;
-  const { shoppingCart, setShoppingCart } = useContext(shoppingCartContext);
-
-  const deleteHandler = () => {
-    const cartCopy = [...shoppingCart];
-    var cartItemIndex = cartCopy.findIndex((item) => {
-      return item.id === productData.id;
-    });
-
-    cartCopy.splice(cartItemIndex, 1);
-    setShoppingCart(cartCopy);
-  };
+  const { productData } = props;
+  const { removeFromCart } = useShoppingCart();
 
   return (
     <Card
@@ -71,9 +61,9 @@ const CartProductsDisplay = (props) => {
 
       <CardActions disableSpacing>
         <Box display='flex' justifyContent='space-between' width={1}>
-          <Box>x{count}</Box>
+          <Box>x{productData.quantity}</Box>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <DeleteIcon onClick={deleteHandler} />
+          <DeleteIcon onClick={() => removeFromCart(productData)} />
         </Box>
       </CardActions>
     </Card>

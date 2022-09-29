@@ -19,7 +19,7 @@ import { userContext } from "../../context/userContext";
 import { shoppingCartContext } from "../../context/shoppingCartContext";
 
 export default function MenuAppBar() {
-  const { loggedIn } = useContext(userContext);
+  const { user } = useContext(userContext);
   const { shoppingCart } = useContext(shoppingCartContext);
   let navigate = useNavigate();
 
@@ -63,7 +63,7 @@ export default function MenuAppBar() {
               color='inherit'
               onClick={() => navigate("/sign-in")}
             >
-              {loggedIn ? (
+              {user ? (
                 <img
                   src={sampleUserData.profilePicture}
                   style={{ borderRadius: "50%", height: "38px" }}

@@ -15,11 +15,11 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Button } from "@mui/material";
-import { shoppingCartContext } from "../context/shoppingCartContext";
+import { useShoppingCart } from "../context/shoppingCartContext";
 
 function ProductDisplay(props) {
   const { productData } = props;
-  const { addToCart } = useContext(shoppingCartContext);
+  const { addToCart } = useShoppingCart();
 
   const onAddToCart = () => {
     addToCart(productData);

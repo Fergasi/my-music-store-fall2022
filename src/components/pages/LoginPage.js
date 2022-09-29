@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import Layout from "../layout/Layout";
 import Button from "@mui/material/Button";
@@ -8,41 +8,45 @@ import PasswordField from "../textFields/PasswordField";
 import { userContext } from "../../context/userContext";
 
 const LoginPage = () => {
-  const { user, setUser, loggedIn, setLoggedIn } = useContext(userContext);
   let navigate = useNavigate();
-
-  const handleClickShowPassword = () => {
-    setUser({
-      ...user,
-      showPassword: !user.showPassword,
-    });
-  };
+  const { user, signIn, signOut } = useContext(userContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [userData, setUserData] = useState({
+    username: "",
+    password: "",
+  });
 
   const handleChange = (prop) => (event) => {
-    setUser({ ...user, [prop]: event.target.value });
+    setUserData({ ...userData, [prop]: event.target.value });
   };
 
   return (
     <Layout>
-      {!loggedIn ? (
+      {!user ? (
         <Box
           display='flex'
           flexDirection='column'
           alignItems='center'
           style={{ marginTop: "25vh" }}
         >
-          <UsernameField user={user} handleChange={handleChange} />
-          <PasswordField
-            user={user}
+          <UsernameField
+            userData={userData}
+            value={userData.username}
             handleChange={handleChange}
-            handleClickShowPassword={handleClickShowPassword}
+          />
+          <PasswordField
+            userData={userData}
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+            value={userData.password}
+            handleChange={handleChange}
           />
           <br />
           <Button
             variant='contained'
             color='success'
             onClick={() => {
-              setLoggedIn(true), navigate("/home"), console.log(user);
+              signIn(userData), navigate("/home");
             }}
           >
             Login
@@ -59,7 +63,7 @@ const LoginPage = () => {
             variant='contained'
             color='error'
             onClick={() => {
-              setLoggedIn(false);
+              signOut();
             }}
           >
             Logout

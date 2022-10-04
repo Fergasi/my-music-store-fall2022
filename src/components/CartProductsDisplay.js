@@ -16,11 +16,16 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useShoppingCart } from "../context/shoppingCartContext";
+import { removeFromCart } from "../redux-state/shoppingCartSlice";
+import { useDispatch } from "react-redux";
 
 const CartProductsDisplay = (props) => {
+  const dispatch = useDispatch();
   const { productData } = props;
-  const { removeFromCart } = useShoppingCart();
+
+  const onRemoveFromCart = () => {
+    dispatch(removeFromCart(productData.id));
+  };
 
   return (
     <Card
@@ -63,7 +68,7 @@ const CartProductsDisplay = (props) => {
         <Box display='flex' justifyContent='space-between' width={1}>
           <Box>x{productData.quantity}</Box>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <DeleteIcon onClick={() => removeFromCart(productData)} />
+          <DeleteIcon onClick={onRemoveFromCart} />
         </Box>
       </CardActions>
     </Card>

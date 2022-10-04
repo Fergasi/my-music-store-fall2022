@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -15,14 +15,15 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Button } from "@mui/material";
-import { useShoppingCart } from "../context/shoppingCartContext";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux-state/shoppingCartSlice";
 
 function ProductDisplay(props) {
   const { productData } = props;
-  const { addToCart } = useShoppingCart();
+  const dispatch = useDispatch();
 
   const onAddToCart = () => {
-    addToCart(productData);
+    dispatch(addToCart(productData));
   };
 
   return (

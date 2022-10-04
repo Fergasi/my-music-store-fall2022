@@ -15,12 +15,11 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import { useNavigate } from "react-router-dom";
 import { sampleUserData } from "../../mockData";
-import { userContext } from "../../context/userContext";
-import { shoppingCartContext } from "../../context/shoppingCartContext";
+import { useSelector } from "react-redux";
 
 export default function MenuAppBar() {
-  const { user } = useContext(userContext);
-  const { shoppingCart } = useContext(shoppingCartContext);
+  const user = useSelector((state) => state.user);
+  const shoppingCart = useSelector((state) => state.shoppingCart);
   let navigate = useNavigate();
 
   return (

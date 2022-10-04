@@ -5,10 +5,16 @@ import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import Layout from "../layout/Layout";
 import CartProductsDisplay from "../CartProductsDisplay";
-import { useShoppingCart } from "../../context/shoppingCartContext";
+import { emptyCart } from "../../redux-state/shoppingCartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ShoppingCart = () => {
-  const { shoppingCart, emptyCart } = useShoppingCart();
+  const dispatch = useDispatch();
+  const shoppingCart = useSelector((state) => state.shoppingCart);
+
+  const onEmptyCart = () => {
+    dispatch(emptyCart());
+  };
 
   return (
     <Layout>
@@ -50,7 +56,7 @@ const ShoppingCart = () => {
           <Button
             variant='contained'
             startIcon={<DeleteIcon />}
-            onClick={emptyCart}
+            onClick={onEmptyCart}
           >
             Empty Cart
           </Button>

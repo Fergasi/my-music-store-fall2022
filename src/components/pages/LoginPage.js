@@ -5,11 +5,13 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import UsernameField from "../textFields/UsernameField";
 import PasswordField from "../textFields/PasswordField";
-import { userContext } from "../../context/userContext";
+import { useDispatch, useSelector } from "react-redux";
+import { signIn, signOut } from "../../redux-state/userSlice";
 
 const LoginPage = () => {
   let navigate = useNavigate();
-  const { user, signIn, signOut } = useContext(userContext);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState({
     username: "",
@@ -18,6 +20,14 @@ const LoginPage = () => {
 
   const handleChange = (prop) => (event) => {
     setUserData({ ...userData, [prop]: event.target.value });
+  };
+
+  const onLogin = () => {
+    dispatch(signIn(userData)), navigate("/home");
+  };
+
+  const onLogout = () => {
+    dispatch(signOut());
   };
 
   return (
@@ -42,13 +52,7 @@ const LoginPage = () => {
             handleChange={handleChange}
           />
           <br />
-          <Button
-            variant='contained'
-            color='success'
-            onClick={() => {
-              signIn(userData), navigate("/home");
-            }}
-          >
+          <Button variant='contained' color='success' onClick={onLogin}>
             Login
           </Button>
         </Box>
@@ -59,13 +63,7 @@ const LoginPage = () => {
           alignItems='center'
           style={{ marginTop: "35vh" }}
         >
-          <Button
-            variant='contained'
-            color='error'
-            onClick={() => {
-              signOut();
-            }}
-          >
+          <Button variant='contained' color='error' onClick={onLogout}>
             Logout
           </Button>
         </Box>

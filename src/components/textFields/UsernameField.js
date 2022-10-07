@@ -8,18 +8,18 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 const UsernameField = ({ userData, handleChange }) => {
   return (
     <FormControl sx={{ m: 1, width: "25ch" }} variant='outlined'>
-      <InputLabel htmlFor='outlined-adornment-password'>Username</InputLabel>
+      <InputLabel htmlFor='outlined-adornment-password'>Email</InputLabel>
       <OutlinedInput
         id='input-with-icon-adornment'
-        type={"username"}
-        value={userData.username}
-        onChange={handleChange("username")}
+        type={"email"}
+        value={userData.email}
+        onChange={handleChange("email")}
         startAdornment={
           <InputAdornment position='start'>
             <AccountCircle />
           </InputAdornment>
         }
-        label='Username'
+        label='Email'
       />
     </FormControl>
   );

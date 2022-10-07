@@ -51,6 +51,7 @@ const removeFromCartReducer = (state, action) => {
     if (item.quantity !== 0) {
       return item;
     }
+    return;
   });
 
   return filteredCart;

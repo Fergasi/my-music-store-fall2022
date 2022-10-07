@@ -65,7 +65,11 @@ export default function MenuAppBar() {
               {user ? (
                 <img
                   src={sampleUserData.profilePicture}
-                  style={{ borderRadius: "50%", height: "38px" }}
+                  style={{
+                    borderRadius: "50%",
+                    height: "32px",
+                    border: "2px solid white",
+                  }}
                 ></img>
               ) : (
                 <AccountCircle />

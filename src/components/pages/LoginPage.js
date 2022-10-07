@@ -14,7 +14,7 @@ const LoginPage = () => {
   const user = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -41,7 +41,7 @@ const LoginPage = () => {
         >
           <UsernameField
             userData={userData}
-            value={userData.username}
+            value={userData.email}
             handleChange={handleChange}
           />
           <PasswordField

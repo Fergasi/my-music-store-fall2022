@@ -31,7 +31,7 @@ export default function MenuAppBar() {
             fontWeight='bold'
             component='div'
             sx={{ flexGrow: 1, "&:hover": { cursor: "pointer" } }}
-            onClick={() => navigate("/home")}
+            onClick={() => navigate("/")}
           >
             MyMusicStore.com
           </Typography>
@@ -62,9 +62,9 @@ export default function MenuAppBar() {
               color='inherit'
               onClick={() => navigate("/sign-in")}
             >
-              {user ? (
+              {user && user.profilePicture ? (
                 <img
-                  src={sampleUserData.profilePicture}
+                  src={user.profilePicture}
                   style={{
                     borderRadius: "50%",
                     height: "32px",

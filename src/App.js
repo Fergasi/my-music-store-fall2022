@@ -7,6 +7,7 @@ import ShoppingCart from "./components/pages/ShoppingCart";
 import CustomThemeProvider from "./CustomThemeProvider";
 import store from "./redux-state/store";
 import { Provider } from "react-redux";
+import UserRegistrationPage from "./components/pages/UserRegistrationPage";
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
       <CustomThemeProvider>
         <BrowserRouter>
           <Routes>
+            <Route path='/' element={<HomePage />} />
             <Route path='/sign-in' element={<LoginPage />} />
-            <Route path='/home' element={<HomePage />} />
+            <Route path='/register-user' element={<UserRegistrationPage />} />
             <Route path='/cart' element={<ShoppingCart />} />
           </Routes>
         </BrowserRouter>

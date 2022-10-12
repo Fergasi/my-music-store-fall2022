@@ -33,6 +33,7 @@ const PasswordField = ({
           </InputAdornment>
         }
         label='Password'
+        required
       />
     </FormControl>
   );

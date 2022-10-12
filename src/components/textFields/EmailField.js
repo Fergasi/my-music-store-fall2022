@@ -5,7 +5,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
-const UsernameField = ({ userData, handleChange }) => {
+const EmailField = ({ userData, handleChange }) => {
   return (
     <FormControl sx={{ m: 1, width: "25ch" }} variant='outlined'>
       <InputLabel htmlFor='outlined-adornment-password'>Email</InputLabel>
@@ -20,9 +20,10 @@ const UsernameField = ({ userData, handleChange }) => {
           </InputAdornment>
         }
         label='Email'
+        required
       />
     </FormControl>
   );
 };
 
-export default UsernameField;
+export default EmailField;

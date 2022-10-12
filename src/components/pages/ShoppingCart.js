@@ -7,8 +7,10 @@ import Layout from "../layout/Layout";
 import CartProductsDisplay from "../CartProductsDisplay";
 import { emptyCart } from "../../redux-state/shoppingCartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const shoppingCart = useSelector((state) => state.shoppingCart);
 
@@ -62,11 +64,13 @@ const ShoppingCart = () => {
           </Button>
         </Box>
         <Box mb={3}>
-          <Link to='/home'>
-            <Button variant='contained' startIcon={<HomeIcon />}>
-              Home
-            </Button>
-          </Link>
+          <Button
+            variant='contained'
+            startIcon={<HomeIcon />}
+            onClick={() => navigate("/")}
+          >
+            Home
+          </Button>
         </Box>
       </Box>
     </Layout>

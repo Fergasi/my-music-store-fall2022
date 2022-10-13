@@ -51,10 +51,6 @@ const UserRegistrationPage = () => {
 
       dispatch(signIn(user));
 
-      // Axios.post("/register-user", {
-      //   ...userRegistrationForm,
-      // });
-
       setUserRegistrationForm({
         firstName: "",
         lastName: "",
@@ -66,6 +62,9 @@ const UserRegistrationPage = () => {
       navigate("/");
     } catch (e) {
       setError(`${e.response.data.message}, please try again`);
+      setTimeout(() => {
+        setError("");
+      }, "4000");
     }
   };
 
@@ -143,11 +142,33 @@ const UserRegistrationPage = () => {
                 />
               </FormControl>
               <br />
-              {error && <Alert severity='error'>{error}</Alert>}
+              {error && (
+                <Alert
+                  severity='error'
+                  sx={{
+                    position: "absolute",
+                    zIndex: "1",
+                    left: "50%",
+                    top: "30%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  {error}
+                </Alert>
+              )}
               <br />
               <Button type='submit' variant='contained' color='success'>
                 Submit
               </Button>
+              <br />
+              <br />
+              <Typography
+                component='div'
+                sx={{ flexGrow: 1, "&:hover": { cursor: "pointer" } }}
+                onClick={() => navigate("/sign-in")}
+              >
+                Sign in?
+              </Typography>
             </Box>
           </form>{" "}
         </>

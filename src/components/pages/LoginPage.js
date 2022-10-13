@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Layout from "../layout/Layout";
 import Button from "@mui/material/Button";
@@ -40,11 +40,22 @@ const LoginPage = () => {
       navigate("/");
     } catch (e) {
       setError(`${e.response.data.message}, please try again`);
+      setTimeout(() => {
+        setError("");
+      }, "4000");
     }
   };
 
-  const onLogout = () => {
-    dispatch(signOut());
+  const onLogOut = async () => {
+    try {
+      await Axios.get("/sign-out");
+      dispatch(signOut());
+    } catch (e) {
+      setError("Network error, please try again");
+      setTimeout(() => {
+        setError("");
+      }, "4000");
+    }
   };
 
   return (
@@ -69,7 +80,20 @@ const LoginPage = () => {
             handleChange={handleChange}
           />
           <br />
-          {error && <Alert severity='error'>{error}</Alert>}
+          {error && (
+            <Alert
+              severity='error'
+              sx={{
+                position: "absolute",
+                zIndex: "1",
+                left: "50%",
+                top: "30%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              {error}
+            </Alert>
+          )}
           <br />
           <Button variant='contained' color='success' onClick={onLogin}>
             Login
@@ -92,9 +116,12 @@ const LoginPage = () => {
           alignItems='center'
           style={{ marginTop: "35vh" }}
         >
-          <Button variant='contained' color='error' onClick={onLogout}>
+          <Button variant='contained' color='error' onClick={onLogOut}>
             Logout
           </Button>
+          <br />
+          {error && <Alert severity='error'>{error}</Alert>}
+          <br />
         </Box>
       )}
     </Layout>

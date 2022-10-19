@@ -23,7 +23,7 @@ const ShoppingCart = () => {
       <Box display='flex' flexDirection='column' alignItems='center'>
         {shoppingCart.map((product, idx) => {
           return (
-            <Box mb={6} key={idx} bgcolor='white'>
+            <Box mb={1} key={idx} bgcolor='white'>
               <CartProductsDisplay productData={product} />
             </Box>
           );

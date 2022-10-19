@@ -43,7 +43,7 @@ const UserRegistrationPage = () => {
     setError(undefined);
 
     try {
-      const response = await axios.post("http://localhost:3010/register-user", {
+      const response = await Axios.post("http://localhost:3010/register-user", {
         ...userRegistrationForm,
       });
 

@@ -1,9 +1,9 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography } from "@mui/material";
 
 function Footer() {
   return (
-    <Box   bgcolor="#17637B" p="40px">
-      <Typography fontWeight="bold" align="center" color="white">MyMusicStore.com</Typography>
+    <Box bgcolor='#154c79' p='40px'>
+      <Typography fontWeight='bold' align='center' color='white'></Typography>
     </Box>
   );
 }

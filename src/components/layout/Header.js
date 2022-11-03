@@ -3,11 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
@@ -15,7 +11,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
 import { Alert } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
 import Login from "@mui/icons-material/Login";
@@ -123,7 +118,8 @@ export default function MenuAppBar() {
                     src={user.profilePicture}
                     style={{
                       borderRadius: "50%",
-                      height: "32px",
+                      height: "33px",
+                      width: "33px",
                       border: "2px solid white",
                       objectFit: "cover",
                     }}

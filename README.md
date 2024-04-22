@@ -3,7 +3,7 @@
 As part of my journey in fullstack development, I embarked on an exciting project to construct a generic e-commerce site. This venture not only served as a perfect practice ground for refining my technical skills but also prepared me to offer tailored solutions to friends and fellow entrepreneurs. The goal was simple yet ambitious: create a customizable, scalable online store template that could eventually help users transition away from dependency on platforms like Shopify.
 
 &nbsp;
-![Ecomm](/images/ecom2.png)
+![Ecomm](/ecom2.png)
 &nbsp;
 
 ## The Modern Tech Stack
